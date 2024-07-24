@@ -24,6 +24,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var registerButton: Button
     private lateinit var nameText: EditText
     private var isPasswordVisible: Boolean=false
+    private var isConfirmPasswordVisible: Boolean=false
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,6 +49,16 @@ class RegisterActivity : AppCompatActivity() {
             if (event.action == MotionEvent.ACTION_UP) {
                 if (event.rawX >= (passwordText.right - passwordText.compoundDrawables[DRAWABLE_END].bounds.width() - passwordText.paddingRight)) {
                     togglePasswordVisibility()
+                    return@setOnTouchListener true
+                }
+            }
+            false
+        }
+        confirmPasswordText.setOnTouchListener { _, event ->
+            val DRAWABLE_END = 2
+            if (event.action == MotionEvent.ACTION_UP) {
+                if (event.rawX >= (confirmPasswordText.right - confirmPasswordText.compoundDrawables[DRAWABLE_END].bounds.width() - confirmPasswordText.paddingRight)) {
+                    toggleConfirmPasswordVisibility()
                     return@setOnTouchListener true
                 }
             }
@@ -122,6 +133,21 @@ class RegisterActivity : AppCompatActivity() {
         // Move the cursor to the end of the text
         passwordText.setSelection(passwordText.text.length)
         isPasswordVisible = !isPasswordVisible
+
+    }
+    private fun toggleConfirmPasswordVisibility() {
+        if (isConfirmPasswordVisible) {
+            // Hide Password
+            confirmPasswordText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            confirmPasswordText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.visibility_off, 0) // Change to your visibility icon
+        } else {
+            // Show Password
+            confirmPasswordText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            confirmPasswordText.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.visibility_on, 0) // Change to your visibility off icon
+        }
+        // Move the cursor to the end of the text
+        confirmPasswordText.setSelection(confirmPasswordText.text.length)
+        isConfirmPasswordVisible = !isConfirmPasswordVisible
     }
 
 
