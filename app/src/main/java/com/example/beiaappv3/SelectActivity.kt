@@ -1,5 +1,6 @@
 package com.example.beiaappv3
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.Toast
@@ -25,6 +26,8 @@ class SelectActivity : AppCompatActivity() {
         innerImageButton1.setOnClickListener {
             // Display a Toast message
             Toast.makeText(this, "Data", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, DataPlotting::class.java)
+            startActivity(intent)
         }
         val innerImageButton2: ImageButton = findViewById(R.id.pumpControl_btn)
         innerImageButton2.setOnClickListener {

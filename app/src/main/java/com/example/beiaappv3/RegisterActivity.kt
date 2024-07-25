@@ -7,6 +7,7 @@ import android.text.InputType
 import android.view.MotionEvent
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var confirmPasswordText: EditText
     private lateinit var registerButton: Button
     private lateinit var nameText: EditText
+    private lateinit var back : ImageButton
     private var isPasswordVisible: Boolean=false
     private var isConfirmPasswordVisible: Boolean=false
 
@@ -42,6 +44,12 @@ class RegisterActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        //use back the image button to go back to the main activity
+        back = findViewById(R.id.imageButton)
+        back.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         passwordText.setOnTouchListener { _, event ->
@@ -149,6 +157,9 @@ class RegisterActivity : AppCompatActivity() {
         confirmPasswordText.setSelection(confirmPasswordText.text.length)
         isConfirmPasswordVisible = !isConfirmPasswordVisible
     }
+
+
+
 
 
 
