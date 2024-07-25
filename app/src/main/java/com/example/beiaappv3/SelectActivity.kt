@@ -29,10 +29,18 @@ class SelectActivity : AppCompatActivity() {
             val intent = Intent(this, DataPlotting::class.java)
             startActivity(intent)
         }
+
         val innerImageButton2: ImageButton = findViewById(R.id.pumpControl_btn)
         innerImageButton2.setOnClickListener {
             // Display a Toast message
             Toast.makeText(this, "Pump", Toast.LENGTH_SHORT).show()
+        }
+
+        val innerImageButton3: ImageButton = findViewById(R.id.logout_btn)
+        innerImageButton3.setOnClickListener {
+            // Display a Toast message
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 }

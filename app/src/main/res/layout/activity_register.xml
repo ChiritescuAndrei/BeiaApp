@@ -26,8 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#A6000000"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="71dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -68,13 +68,15 @@
 
     <ImageView
         android:id="@+id/line_beia"
-        android:layout_width="170dp"
+        android:layout_width="120dp"
         android:layout_height="1dp"
         android:src="@drawable/line_beia"
+        app:layout_constraintBottom_toTopOf="@+id/name_surname"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.207"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/underlined_register" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/name_surname"
+        app:layout_constraintTop_toBottomOf="@+id/underlined_register"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/password_text"
@@ -84,7 +86,7 @@
         android:drawableEnd="@drawable/visibility_off"
         android:drawablePadding="20dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="Enter your password"
         android:inputType="textPassword"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -116,7 +118,7 @@
         android:layout_height="40dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
-        android:hint="Name"
+        android:hint="Enter your name"
         android:inputType="text"
         android:paddingLeft="10dp"
         android:textColorHint="#626262"
@@ -147,7 +149,7 @@
         android:layout_height="40dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
-        android:hint="Email"
+        android:hint="Enter your email"
         android:inputType="text"
         android:paddingLeft="10dp"
         android:textColorHint="#626262"
@@ -179,7 +181,7 @@
         android:background="@drawable/rounded_edittext"
         android:drawableEnd="@drawable/visibility_off"
         android:ems="10"
-        android:hint="Confirm Password"
+        android:hint="Confirm your password"
         android:inputType="textPassword"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -222,15 +224,15 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="34dp"
+        android:layout_height="33dp"
         android:background="@drawable/icon"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/underlined_register"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/underlined_register"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058" />
+        app:layout_constraintVertical_bias="0.365" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
