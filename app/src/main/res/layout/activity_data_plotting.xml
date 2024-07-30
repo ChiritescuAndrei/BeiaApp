@@ -75,16 +75,16 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/temperature" />
 
-            <EditText
+            <TextView
                 android:id="@+id/temperatureText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:background="@android:color/transparent"
                 android:hint="Temperature"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/holo_orange_dark"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:background="@android:color/transparent" />
+                android:textStyle="bold" />
         </FrameLayout>
 
         <FrameLayout
@@ -100,13 +100,13 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/humidity" />
 
-            <EditText
+            <TextView
                 android:id="@+id/humidityText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:hint="Humidity"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/holo_orange_dark"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:background="@android:color/transparent" />
@@ -124,7 +124,7 @@
         app:layout_constraintHeight_percent="0.2"
         app:layout_constraintStart_toStartOf="@id/linearLayout2"
         app:layout_constraintTop_toBottomOf="@id/linearLayout2"
-        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintVertical_bias="0.14"
         app:layout_constraintWidth_percent="0.9">
 
         <FrameLayout
@@ -140,13 +140,13 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/luminosity" />
 
-            <EditText
+            <TextView
                 android:id="@+id/luminosityText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:hint="Luminosity"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/holo_orange_dark"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:background="@android:color/transparent" />
@@ -165,13 +165,13 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/radiation" />
 
-            <EditText
+            <TextView
                 android:id="@+id/solarRadiationText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:hint="Solar Radiation"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/holo_orange_dark"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:background="@android:color/transparent" />
