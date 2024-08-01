@@ -73,15 +73,15 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/temperature" />
+                android:src="@drawable/temperatura" />
 
             <TextView
                 android:id="@+id/temperatureText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+
                 android:background="@android:color/transparent"
-                android:hint="Temperature"
                 android:textColor="@android:color/holo_orange_dark"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -105,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:hint="Humidity"
+
                 android:textColor="@android:color/holo_orange_dark"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -145,11 +145,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:hint="Luminosity"
+                android:background="@android:color/transparent"
+
                 android:textColor="@android:color/holo_orange_dark"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:background="@android:color/transparent" />
+                android:textStyle="bold" />
         </FrameLayout>
 
         <FrameLayout
@@ -163,14 +163,13 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
-                android:src="@drawable/radiation" />
+                android:src="@drawable/solar_radiation" />
 
             <TextView
                 android:id="@+id/solarRadiationText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:hint="Solar Radiation"
                 android:textColor="@android:color/holo_orange_dark"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -182,12 +181,12 @@
         android:id="@+id/textView4"
         android:layout_width="310dp"
         android:layout_height="37dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="12dp"
         android:text="Data Visualization"
         android:textColor="#FFFFFF"
         android:textSize="30dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintHorizontal_bias="0.225"
         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
