@@ -34,6 +34,8 @@ class SelectActivity : AppCompatActivity() {
         innerImageButton2.setOnClickListener {
             // Display a Toast message
             Toast.makeText(this, "Pump", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, PumpControl::class.java)
+            startActivity(intent)
         }
 
         val innerImageButton3: ImageButton = findViewById(R.id.logout_btn)
