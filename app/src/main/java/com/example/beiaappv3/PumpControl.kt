@@ -36,8 +36,7 @@ class PumpControl : AppCompatActivity() {
                 handleMessage(message)
             }
         }
-        //initialize the button
-        button = findViewById(R.id.button   )
+        button = findViewById(R.id.toggleButton   )
         mqttHandler.connect(brokerUrl, clientId)
         //when I press the button, the publish function is called
         button.setOnClickListener {

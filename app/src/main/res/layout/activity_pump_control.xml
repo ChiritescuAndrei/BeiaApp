@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".PumpControl">
 
-
     <ImageView
         android:id="@+id/backgroundImage"
         android:layout_width="0dp"
@@ -52,66 +51,85 @@
 
     <ImageButton
         android:id="@+id/imageButton"
-        android:layout_width="34dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:background="@drawable/icon"
+        app:layout_constraintWidth_percent="0.1"
+        app:layout_constraintHeight_percent="0.05"
         app:layout_constraintBottom_toBottomOf="@+id/textView4"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.162" />
+        app:layout_constraintVertical_bias="0.400" />
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="310dp"
-        android:layout_height="37dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintHeight_percent="0.039"
         android:layout_marginTop="12dp"
-        android:text="Data Visualization"
+        android:text="Pump Control"
         android:textColor="#FFFFFF"
-        android:textSize="30dp"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="25sp"
+        android:autoSizeMaxTextSize="50sp"
+        android:autoSizeStepGranularity="1sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.225"
+        app:layout_constraintHorizontal_bias="0.14"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <ImageView
         android:id="@+id/line_beia"
-        android:layout_width="250dp"
-        android:layout_height="9dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="0dp"
         android:src="@drawable/line_beia"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintHeight_percent="0.01"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintWidth_percent="0.4" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="380dp"
-        android:layout_height="323dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintHeight_percent="0.5"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.653"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.1"
         app:layout_constraintWidth_percent="0.9">
 
         <ImageView
-            android:id="@+id/temperature"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/pump"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/offpump" />
+            android:src="@drawable/offpump"
+            app:layout_constraintWidth_percent="1.0"
+            app:layout_constraintHeight_percent="1.0" />
     </LinearLayout>
 
+    <ImageButton
+        android:id="@+id/toggleButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/toggle_on"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintHeight_percent="0.12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
