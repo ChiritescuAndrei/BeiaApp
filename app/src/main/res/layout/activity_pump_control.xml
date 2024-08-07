@@ -49,32 +49,32 @@
             android:src="@drawable/beia_logo" />
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/icon"
-        app:layout_constraintWidth_percent="0.1"
-        app:layout_constraintHeight_percent="0.05"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
-        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.400" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/imageButton"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:background="@drawable/icon"-->
+<!--        app:layout_constraintWidth_percent="0.1"-->
+<!--        app:layout_constraintHeight_percent="0.05"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/textView4"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/linearLayout"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/textView4"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.400" />-->
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintWidth_percent="0.5"
         app:layout_constraintHeight_percent="0.039"
         android:layout_marginTop="12dp"
         android:text="Pump Control"
         android:textColor="#FFFFFF"
         android:autoSizeTextType="uniform"
         android:autoSizeMinTextSize="25sp"
-        android:autoSizeMaxTextSize="50sp"
+        android:autoSizeMaxTextSize="40sp"
         android:autoSizeStepGranularity="1sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.14"
@@ -96,8 +96,8 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="279dp"
+        android:layout_height="301dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -116,20 +116,42 @@
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:src="@drawable/offpump"
-            app:layout_constraintWidth_percent="1.0"
-            app:layout_constraintHeight_percent="1.0" />
+            app:layout_constraintHeight_percent="1.0"
+            app:layout_constraintWidth_percent="1.0" />
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/toggleButton"
+`
+    <TextView
+        android:id="@+id/text_switch"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/toggle_on"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintHeight_percent="0.12"
+        android:layout_height="41dp"
+        android:gravity="center"
+        android:text="Press to START the Pump"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/switch_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <Switch
+        android:id="@+id/switch_button"
+        android:layout_width="111dp"
+        android:layout_height="64dp"
+        android:thumb="@drawable/thumb"
+        android:track="@drawable/track"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.9"
+        app:layout_constraintWidth_percent="0.7"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
