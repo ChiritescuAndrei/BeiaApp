@@ -8,6 +8,7 @@ import androidx.core.view.WindowInsetsCompat
 import android.content.Context
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import org.eclipse.paho.client.mqttv3.MqttClient
@@ -17,7 +18,7 @@ class PumpControl : AppCompatActivity() {
     private val brokerUrl = "tcp://mqtt.beia-telemetrie.ro:1883"
     private val clientId = MqttClient.generateClientId()
     private val topic = "meshlium3d4c/Gabi/TC"
-    private lateinit var button: Button
+    private lateinit var button: ImageButton
     private lateinit var mqttHandler: MqttHandler
 
     override fun onCreate(savedInstanceState: Bundle?) {
