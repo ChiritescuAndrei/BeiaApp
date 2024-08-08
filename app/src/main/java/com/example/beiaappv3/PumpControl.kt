@@ -1,5 +1,16 @@
 package com.example.beiaappv3
 
+import android.app.AlertDialog
+import android.widget.NumberPicker;
+import android.view.WindowManager
+import android.app.Dialog
+import android.view.Gravity
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.widget.Toast
+import android.view.LayoutInflater
+
+
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
@@ -63,13 +74,68 @@ class PumpControl : AppCompatActivity() {
         switchButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 // Switch is on, show "Press to STOP the pump"
-                setSpannableText(textSwitch, "Press to STOP the pump", "STOP", orangeColor)
+                showTimerPickerDialog()
             } else {
                 // Switch is off, show "Press to START the pump"
                 setSpannableText(textSwitch, "Press to START the pump", "START", orangeColor)
             }
         }
     }
+
+    private fun showTimerPickerDialog() {
+        // Create a new dialog
+        val dialog = Dialog(this)
+
+        // Set the custom layout for the dialog
+        dialog.setContentView(R.layout.activity_timer)
+
+        // Find the NumberPicker and Button views in the dialog
+        val hourPicker: NumberPicker = dialog.findViewById(R.id.hour_picker)
+        val minutePicker: NumberPicker = dialog.findViewById(R.id.minute_picker)
+        val secondPicker: NumberPicker = dialog.findViewById(R.id.second_picker)
+        val doneButton: Button = dialog.findViewById(R.id.done_button)
+
+        // Set min and max values for NumberPickers
+        hourPicker.minValue = 0
+        hourPicker.maxValue = 23
+        minutePicker.minValue = 0
+        minutePicker.maxValue = 59
+        secondPicker.minValue = 0
+        secondPicker.maxValue = 59
+
+        // Set the Done button click listener
+        doneButton.setOnClickListener {
+            // Get the selected values from NumberPickers
+            val hours = hourPicker.value
+            val minutes = minutePicker.value
+            val seconds = secondPicker.value
+
+            // Do something with the selected values
+            // For example, you could display them in a Toast or update some UI
+            Toast.makeText(this, "Time set: $hours:$minutes:$seconds", Toast.LENGTH_SHORT).show()
+
+            // Dismiss the dialog
+            dialog.dismiss()
+            val orangeColor = ContextCompat.getColor(this, R.color.beia_orange)
+            setSpannableText(textSwitch, "Press to STOP the pump", "STOP", orangeColor)
+        }
+
+        // Set dialog properties
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setCancelable(true) // Make dialog dismissible by tapping outside or using the back button
+
+        val layoutParams = WindowManager.LayoutParams()
+        layoutParams.copyFrom(dialog.window?.attributes) // Copy existing attributes
+        layoutParams.width = (resources.displayMetrics.widthPixels * 0.85).toInt()
+        layoutParams.gravity = Gravity.CENTER// Set width to match parent
+        layoutParams.height = (resources.displayMetrics.heightPixels * 0.5).toInt()// Set height to wrap content
+        dialog.window?.attributes = layoutParams
+
+        // Show the dialog
+        dialog.show()
+    }
+
+
     private fun handleMessage(message: String) {
         val jsonObject = JSONObject(message)
         val tcArray = jsonObject.getJSONArray("TC: 11")
