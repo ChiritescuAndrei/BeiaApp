@@ -49,20 +49,6 @@
             android:src="@drawable/beia_logo" />
     </LinearLayout>
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/imageButton"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:background="@drawable/icon"-->
-<!--        app:layout_constraintWidth_percent="0.1"-->
-<!--        app:layout_constraintHeight_percent="0.05"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/textView4"-->
-<!--        app:layout_constraintEnd_toStartOf="@+id/linearLayout"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/textView4"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.400" />-->
-
     <TextView
         android:id="@+id/textView4"
         android:layout_width="0dp"
@@ -94,12 +80,10 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:layout_constraintWidth_percent="0.4" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <FrameLayout
+        android:id="@+id/pump_container"
         android:layout_width="279dp"
         android:layout_height="301dp"
-        android:gravity="center"
-        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.5"
@@ -118,9 +102,18 @@
             android:src="@drawable/offpump"
             app:layout_constraintHeight_percent="1.0"
             app:layout_constraintWidth_percent="1.0" />
-    </LinearLayout>
 
-`
+        <ImageView
+            android:id="@+id/water_drop"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/water_drop"
+            android:visibility="gone"/> <!-- Initially hidden -->
+    </FrameLayout>
+
     <TextView
         android:id="@+id/text_switch"
         android:layout_width="0dp"
@@ -142,9 +135,10 @@
         android:id="@+id/text_timer"
         android:layout_width="0dp"
         android:layout_height="41dp"
-        android:gravity="center"
+        android:layout_marginBottom="52dp"
 
-        android:textColor="#FFFFFF"
+        android:gravity="center"
+        android:textColor="#EB7B1D"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/switch_button"
         app:layout_constraintEnd_toEndOf="parent"

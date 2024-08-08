@@ -1,6 +1,8 @@
 package com.example.beiaappv3
 
 import android.os.CountDownTimer
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.app.Dialog
 import android.view.Gravity
 import android.view.WindowManager
@@ -19,6 +21,7 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -31,15 +34,23 @@ class PumpControl : AppCompatActivity() {
     private val clientId = MqttClient.generateClientId()
     private val topic = "meshlium3d4c/Gabi/TC"
     private lateinit var switchButton: Switch
+    private lateinit var waterDrop: ImageView
     private lateinit var mqttHandler: MqttHandler
     private lateinit var textSwitch: TextView
     private lateinit var text_timer: TextView
     private var countDownTimer: CountDownTimer? = null
+    private lateinit var dropAnimation: Animation
+    private lateinit var alphaAnimation: Animation
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_pump_control)
+        text_timer = findViewById(R.id.text_timer)
+        dropAnimation = AnimationUtils.loadAnimation(this, R.anim.drop_animation)
+        waterDrop = findViewById(R.id.water_drop)
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -76,6 +87,8 @@ class PumpControl : AppCompatActivity() {
                 // Switch is off, show "Press to START the pump"
                 setSpannableText(textSwitch, "Press to START the pump", "START", orangeColor)
                 countDownTimer?.cancel()
+                text_timer.text = "00:00:00"
+                stopWaterDropAnimations()
                 setSpannableText(textSwitch, "Press to STOP the pump", "STOP", orangeColor)
             }
         }
@@ -140,6 +153,7 @@ class PumpControl : AppCompatActivity() {
 
     private fun startCountdownTimer(hours: Int, minutes: Int, seconds: Int) {
         val totalMillis = (hours * 3600 + minutes * 60 + seconds) * 1000L
+        startWaterDropAnimations(dropAnimation)
         countDownTimer?.cancel()
         countDownTimer = object : CountDownTimer(totalMillis, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -150,14 +164,15 @@ class PumpControl : AppCompatActivity() {
                 val secs = remainingSeconds % 60
                 val orangeColor = ContextCompat.getColor(this@PumpControl, R.color.beia_orange)
                 setSpannableText(textSwitch, "Press to STOP the pump", "STOP", orangeColor)
-                text_timer = findViewById(R.id.text_timer)
                 text_timer.text = String.format("%02d:%02d:%02d", hrs, mins, secs)
-
 
             }
 
             override fun onFinish() {
                 // Time is up, turn off the switch
+                stopWaterDropAnimations()
+                waterDrop.visibility = ImageView.GONE
+
                 turnOffSwitch()
             }
         }.start()
@@ -171,6 +186,7 @@ class PumpControl : AppCompatActivity() {
         // Send "OFF" as JSON object to the topic
         val json = JSONObject()
         json.put("Pump", "OFF")
+
         mqttHandler.publish(topic, json.toString())
     }
 
@@ -178,6 +194,19 @@ class PumpControl : AppCompatActivity() {
         val jsonObject = JSONObject(message)
         val tcArray = jsonObject.getJSONArray("TC: 11")
         val tc = tcArray.getDouble(0)
+    }
+    private fun startWaterDropAnimations(vararg animations: Animation) {
+        // Make the water drop visible and start animations
+        waterDrop.visibility = ImageView.VISIBLE
+        for (animation in animations) {
+            waterDrop.startAnimation(animation)
+        }
+    }
+
+    private fun stopWaterDropAnimations() {
+        // Stop any ongoing animations
+        waterDrop.clearAnimation()
+        waterDrop.visibility = ImageView.GONE
     }
 
     private fun setSpannableText(textView: TextView, fullText: String, wordToColor: String, color: Int) {
