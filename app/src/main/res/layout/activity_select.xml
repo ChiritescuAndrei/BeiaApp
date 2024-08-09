@@ -21,15 +21,13 @@
         app:layout_constraintVertical_bias="1.0" />
 
 
-
-
     <View
         android:id="@+id/darkOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#A6000000"
-        tools:layout_editor_absoluteX="-16dp"
-        tools:layout_editor_absoluteY="-131dp" />
+        android:background="#C6000000"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -55,25 +53,24 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="134dp"
-        android:layout_height="33dp"
+        android:layout_width="115dp"
+        android:layout_height="43dp"
         android:text="Select"
         android:textColor="#FFFFFF"
-        android:textSize="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/dataVisuals_btn"
+        android:textSize="32sp"
         app:layout_constraintEnd_toStartOf="@+id/pumpControl_btn"
-        app:layout_constraintHorizontal_bias="0.557"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/backgroundImage"
-        app:layout_constraintVertical_bias="0.577"></TextView>
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <ImageView
         android:id="@+id/line_beia"
-        android:layout_width="100dp"
-        android:layout_height="20dp"
+        android:layout_width="91dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="2dp"
         android:src="@drawable/line_beia"
         app:layout_constraintBottom_toTopOf="@+id/dataVisuals_btn"
-        app:layout_constraintEnd_toStartOf="@+id/pumpControl_btn"
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
@@ -85,12 +82,12 @@
         android:layout_height="192dp"
         android:background="@drawable/rounded_button_background"
         android:text="Pump Control"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.882"
+        app:layout_constraintHorizontal_bias="0.834"
         app:layout_constraintStart_toStartOf="@+id/backgroundImage"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.346" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.007" />
 
     <ImageButton
         android:id="@+id/dataVisuals_btn"
@@ -100,10 +97,10 @@
         android:text="Data Visualisation"
         app:layout_constraintBottom_toBottomOf="@+id/backgroundImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.127"
+        app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.659" />
+        app:layout_constraintTop_toBottomOf="@+id/pumpControl_btn"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/logout_btn"
@@ -111,11 +108,11 @@
         android:layout_height="190dp"
         android:background="@drawable/logout_bun"
         android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/backgroundImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.923"
+        app:layout_constraintHorizontal_bias="0.916"
         app:layout_constraintStart_toStartOf="@+id/backgroundImage"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.946" />
+        app:layout_constraintTop_toBottomOf="@+id/pumpControl_btn"
+        app:layout_constraintVertical_bias="0.919" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

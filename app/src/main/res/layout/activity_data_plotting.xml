@@ -23,7 +23,7 @@
         android:id="@+id/darkOverlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#A6000000"
+        android:background="#C6000000"
         tools:layout_editor_absoluteX="-87dp"
         tools:layout_editor_absoluteY="25dp" />
 
@@ -179,28 +179,27 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="310dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="265dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="20dp"
         android:text="Data Visualization"
         android:textColor="#FFFFFF"
-        android:textSize="30dp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.225"
+        app:layout_constraintHorizontal_bias="0.15"
         app:layout_constraintStart_toStartOf="@+id/linearLayout2"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <ImageView
         android:id="@+id/line_beia"
-        android:layout_width="250dp"
-        android:layout_height="9dp"
+        android:layout_width="246dp"
+        android:layout_height="7dp"
         android:layout_marginTop="4dp"
         android:src="@drawable/line_beia"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintWidth_percent="0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
