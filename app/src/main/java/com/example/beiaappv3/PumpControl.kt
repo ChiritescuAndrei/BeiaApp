@@ -71,25 +71,30 @@ class PumpControl : AppCompatActivity() {
         switchButton = findViewById(R.id.switch_button)
         mqttHandler.connect(brokerUrl, clientId)
 
-        // When I press the button, the publish function is called
-        switchButton.setOnClickListener {
-            // Send "ON" as JSON object to the topic
-            val json = JSONObject()
-            json.put("Pump", "ON")
-            mqttHandler.publish(topic, json.toString())
-        }
+//        // When I press the button, the publish function is called
+//        switchButton.setOnClickListener {
+//            // Send "ON" as JSON object to the topic
+//            val json = JSONObject()
+//            json.put("Pump", "ON")
+//            json.put("Duration", countDownTimer)
+//            mqttHandler.publish(topic, json.toString())
+//        }
 
         switchButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 // Switch is on, show "Press to STOP the pump"
                 showTimerPickerDialog()
             } else {
+                // Send "OFF" as JSON object to the topic
+                val json = JSONObject()
+                json.put("Pump", "OFF")
+                mqttHandler.publish(topic, json.toString())
+
                 // Switch is off, show "Press to START the pump"
-                setSpannableText(textSwitch, "Press to START the pump", "START", orangeColor)
                 countDownTimer?.cancel()
                 text_timer.text = "00:00:00"
                 stopWaterDropAnimations()
-                setSpannableText(textSwitch, "Press to STOP the pump", "STOP", orangeColor)
+                setSpannableText(textSwitch, "Press to START the pump", "START", orangeColor)
             }
         }
     }
@@ -128,6 +133,13 @@ class PumpControl : AppCompatActivity() {
             } else {
                 // Start the countdown timer
                 startCountdownTimer(hours, minutes, seconds)
+
+                // Send "ON" and the duration as JSON object to the topic
+                val json = JSONObject()
+                json.put("Pump", "ON")
+                json.put("Duration", (hours * 3600 + minutes * 60 + seconds))
+                mqttHandler.publish(topic, json.toString())
+
                 val orangeColor = ContextCompat.getColor(this, R.color.beia_orange)
                 setSpannableText(textSwitch, "Press to STOP the pump", "STOP", orangeColor)
             }
@@ -182,12 +194,6 @@ class PumpControl : AppCompatActivity() {
         switchButton.isChecked = false
         val orangeColor = ContextCompat.getColor(this, R.color.beia_orange)
         setSpannableText(textSwitch, "Press to START the pump", "START", orangeColor)
-
-        // Send "OFF" as JSON object to the topic
-        val json = JSONObject()
-        json.put("Pump", "OFF")
-
-        mqttHandler.publish(topic, json.toString())
     }
 
     private fun handleMessage(message: String) {
