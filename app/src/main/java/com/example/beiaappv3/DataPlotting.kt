@@ -1,8 +1,10 @@
 package com.example.beiaappv3
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +23,7 @@ class DataPlotting : AppCompatActivity() {
     private lateinit var luminosityText: TextView
     private lateinit var humidityText: TextView
     private lateinit var temperatureText: TextView
+    private lateinit var back: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +51,13 @@ class DataPlotting : AppCompatActivity() {
 
         // Retrieve and display saved values from SharedPreferences
         loadSavedValues()
+
+        //use back the image button to go back to the main activity
+        back = findViewById(R.id.back_button)
+        back.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun handleMessage(message: String) {

@@ -158,5 +158,16 @@
         app:layout_constraintVertical_bias="0.333"
         app:layout_constraintWidth_percent="0.7"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="34dp"
+        android:layout_height="33dp"
+        android:background="@drawable/icon"
+        app:layout_constraintBottom_toTopOf="@+id/line_beia"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/line_beia"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.365" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

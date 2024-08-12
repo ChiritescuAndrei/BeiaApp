@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.content.Context
+import android.content.Intent
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
@@ -36,6 +37,7 @@ class PumpControl : AppCompatActivity() {
     private lateinit var switchButton: Switch
     private lateinit var waterDrop: ImageView
     private lateinit var mqttHandler: MqttHandler
+    private lateinit var back: ImageView
     private lateinit var textSwitch: TextView
     private lateinit var text_timer: TextView
     private var countDownTimer: CountDownTimer? = null
@@ -50,6 +52,12 @@ class PumpControl : AppCompatActivity() {
         dropAnimation = AnimationUtils.loadAnimation(this, R.anim.drop_animation)
         waterDrop = findViewById(R.id.water_drop)
 
+        //use back the image button to go back to the main activity
+        back = findViewById(R.id.back_button)
+        back.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -97,6 +105,7 @@ class PumpControl : AppCompatActivity() {
                 setSpannableText(textSwitch, "Press to START the pump", "START", orangeColor)
             }
         }
+
     }
 
     private fun showTimerPickerDialog() {
