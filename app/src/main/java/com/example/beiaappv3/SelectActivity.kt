@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
+
 class SelectActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,13 +35,24 @@ class SelectActivity : AppCompatActivity() {
         innerImageButton2.setOnClickListener {
             // Display a Toast message
             Toast.makeText(this, "Pump", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, PumpControl::class.java)
+            startActivity(intent)
         }
 
         val innerImageButton3: ImageButton = findViewById(R.id.logout_btn)
         innerImageButton3.setOnClickListener {
+            logoutUser();
             // Display a Toast message
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+    }
+
+
+    private fun logoutUser() {
+        val sharedPreferences = getSharedPreferences("login_prefs", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.clear()
+        editor.apply()
     }
 }

@@ -4,4 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="beia_orange">#F06B2B</color>
     <color name="beia_gray">#999999</color>
+    <color name="light_beia_gray">#E3D3D3</color>
+    <color name="light_beia_orange">#EB7B1D</color>
+
 </resources>

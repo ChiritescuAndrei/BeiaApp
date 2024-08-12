@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardElevation="10dp"
+    app:cardCornerRadius="15dp"
+    app:cardBackgroundColor="@color/light_beia_orange"
+    app:strokeWidth="2dp"
+    app:strokeColor="#E3D3D3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/set_time_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:text="Set Time"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingRight="30dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hours"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/light_beia_gray"
+                    android:textSize="16sp"
+                    android:gravity="center_horizontal"/>
+
+                <NumberPicker
+                    android:id="@+id/hour_picker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleX="1.15"
+                    android:scaleY="1.15"
+                    android:background="@android:color/transparent"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingRight="30dp"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Minutes"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/light_beia_gray"
+                    android:textSize="16sp"
+                    android:gravity="center_horizontal"/>
+
+                <NumberPicker
+                    android:id="@+id/minute_picker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleX="1.15"
+                    android:scaleY="1.15"
+                    android:background="@android:color/transparent"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Seconds"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/light_beia_gray"
+                    android:textSize="16sp"
+                    android:gravity="center_horizontal"/>
+
+                <NumberPicker
+                    android:id="@+id/second_picker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleX="1.15"
+                    android:scaleY="1.15"
+                    android:background="@android:color/transparent"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/done_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/light_beia_gray"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="Done"
+            android:textColor="@color/light_beia_orange" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
