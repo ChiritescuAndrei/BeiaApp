@@ -2,6 +2,7 @@ package com.example.beiaappv3
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -20,13 +21,12 @@ import android.text.style.ForegroundColorSpan
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.NumberPicker
 import android.widget.Switch
 import android.widget.TextView
-import androidx.work.Data
-import androidx.work.OneTimeWorkRequest
-import androidx.work.WorkManager
+import android.widget.Toast
 import org.eclipse.paho.client.mqttv3.MqttClient
 import org.json.JSONObject
 
@@ -48,7 +48,7 @@ class PumpControl : AppCompatActivity() {
     private lateinit var sharedPreferences: SharedPreferences
     private val PREFS_NAME = "PumpControlPrefs"
     private val TIMER_KEY = "timer_duration"
-    private val TOGLE_KEY = "togle_state"
+    private lateinit var back: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,21 +82,29 @@ class PumpControl : AppCompatActivity() {
         switchButton = findViewById(R.id.switch_button)
         mqttHandler.connect(brokerUrl, clientId)
 
-        // Restore timer state if any
-        restoreTimerState()
+        back = findViewById(R.id.back_button)
+
 
         switchButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 setSpannableText(textSwitch, "Press to STOP the pump", "STOP", orangeColor)
                 // Switch is on, show timer picker dialog
                 showTimerPickerDialog()
-                with(sharedPreferences.edit()) {
-                    putLong(TOGLE_KEY, 1)
-                    apply()
-                }
+
             } else {
                 // Switch is off, reset timer and UI
                 resetTimerUI()
+            }
+        }
+
+        back.setOnClickListener(){
+            if(switchButton.isChecked){
+                Toast.makeText(this, "Please stop the pump before going back", Toast.LENGTH_SHORT).show()
+
+            }
+            else {
+                val intent = Intent(this, SelectActivity::class.java)
+                startActivity(intent)
             }
         }
     }
@@ -131,7 +139,7 @@ class PumpControl : AppCompatActivity() {
 
             if (hours == 0 && minutes == 0 && seconds == 0) {
                 // Timer is set to 0, turn off the switch
-                turnOffSwitch()
+                resetTimerUI()
             } else {
                 // Start the countdown timer
                 startCountdownTimer(hours, minutes, seconds)
@@ -162,14 +170,6 @@ class PumpControl : AppCompatActivity() {
         val totalMillis = (hours * 3600 + minutes * 60 + seconds) * 1000L
         startWaterDropAnimations(dropAnimation)
 
-        // Schedule the Worker to run in the background
-        val workRequest = OneTimeWorkRequest.Builder(TimerWorker::class.java)
-            .setInitialDelay(totalMillis, java.util.concurrent.TimeUnit.MILLISECONDS)
-            .setInputData(Data.Builder().putLong("DURATION_MILLIS", totalMillis).build())
-            .build()
-
-        WorkManager.getInstance(this).enqueue(workRequest)
-
         // Initialize and start CountDownTimer
         countDownTimer = object : CountDownTimer(totalMillis, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -178,11 +178,13 @@ class PumpControl : AppCompatActivity() {
                 val mins = (remainingSeconds % 3600) / 60
                 val secs = remainingSeconds % 60
                 text_timer.text = String.format("%02d:%02d:%02d", hrs, mins, secs)
+
                 // Save timer state
                 with(sharedPreferences.edit()) {
                     putLong(TIMER_KEY, millisUntilFinished)
                     apply()
                 }
+
             }
 
             override fun onFinish() {
@@ -194,26 +196,24 @@ class PumpControl : AppCompatActivity() {
     private fun resetTimerUI() {
         switchButton.isChecked = false
         countDownTimer?.cancel()
+        countDownTimer = null
+
+//        switchButton.isChecked = false
         text_timer.text = "00:00:00"
         stopWaterDropAnimations()
+
         val orangeColor = ContextCompat.getColor(this, R.color.beia_orange)
         setSpannableText(textSwitch, "Press to START the pump", "START", orangeColor)
 
 
         // Clear timer state
         with(sharedPreferences.edit()) {
-            remove(TIMER_KEY)
+            putLong(TIMER_KEY, 0)
             apply()
-        }
 
-        with(sharedPreferences.edit()) {
-            putLong(TOGLE_KEY, 0)
-            apply()
+            // Verify if the timer is removed
+            println("TIMER1 REMOVED " + sharedPreferences.getLong(TIMER_KEY, 0L))
         }
-
-        //kill the thread from timerworker
-//        val workManager = WorkManager.getInstance(this)
-//        workManager.cancelAllWork()
 
 
         // Send "OFF" as JSON object to the topic
@@ -222,53 +222,15 @@ class PumpControl : AppCompatActivity() {
         mqttHandler.publish(topic, json.toString())
     }
 
-    private fun restoreTimerState() {
-
-
-        val savedMillis = sharedPreferences.getLong(TIMER_KEY, 0L)
-
-        val stateToggle = sharedPreferences.getLong(TOGLE_KEY, 0L)
-
-        if (stateToggle == 1L) {
-            switchButton.isChecked = true
+    override fun onBackPressed() {
+        // Check if the switch is on
+        if (switchButton.isChecked) {
+            // Show a message or do nothing to prevent going back
+            Toast.makeText(this, "Please stop the pump before going back", Toast.LENGTH_SHORT).show()
         } else {
-            switchButton.isChecked = false
+            // Call the super method to handle the back press normally
+            super.onBackPressed()
         }
-
-        //print the savedMillis
-        println("AICI SUNT ALEA RAMASE " + savedMillis)
-
-        if (savedMillis > 0) {
-            startWaterDropAnimations(dropAnimation)
-            val orangeColor = ContextCompat.getColor(this, R.color.beia_orange)
-            setSpannableText(textSwitch, "Press to STOP the pump", "STOP", orangeColor)
-
-            // Restore UI with timer remaining
-            countDownTimer = object : CountDownTimer(savedMillis, 1000) {
-                override fun onTick(millisUntilFinished: Long) {
-                    val remainingSeconds = millisUntilFinished / 1000
-                    val hrs = remainingSeconds / 3600
-                    val mins = (remainingSeconds % 3600) / 60
-                    val secs = remainingSeconds % 60
-                    text_timer.text = String.format("%02d:%02d:%02d", hrs, mins, secs)
-                }
-
-                override fun onFinish() {
-                    resetTimerUI()
-                }
-            }.start()
-        }
-    }
-
-    private fun turnOffSwitch() {
-        switchButton.isChecked = false
-        val orangeColor = ContextCompat.getColor(this, R.color.beia_orange)
-        setSpannableText(textSwitch, "Press to START the pump", "START", orangeColor)
-
-        // Send "OFF" as JSON object to the topic
-        val json = JSONObject()
-        json.put("Pump", "OFF")
-        mqttHandler.publish(topic, json.toString())
     }
 
     private fun handleMessage(message: String) {
