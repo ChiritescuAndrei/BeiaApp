@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
+import com.google.firebase.auth.FirebaseUser
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -113,19 +114,46 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+
+
     private fun registerUser(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
+                    // Registration successful
+                    val user = auth.currentUser
+                    user?.let {
+                        sendVerificationEmail(it)
+                    }
+                    Toast.makeText(this, "Registration successful. Please check your email for verification.", Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 } else {
+                    // Registration failed
                     Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }
+    }
 
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
+    private fun sendVerificationEmail(user: FirebaseUser) {
+        user.sendEmailVerification()
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    Toast.makeText(
+                        this,
+                        "Verification email sent to ${user.email}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Failed to send verification email: ${task.exception?.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
     }
 
     private fun togglePasswordVisibility() {
