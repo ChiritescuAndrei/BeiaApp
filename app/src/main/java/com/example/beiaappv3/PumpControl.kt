@@ -211,6 +211,11 @@ class PumpControl : AppCompatActivity() {
             apply()
         }
 
+        //kill the thread from timerworker
+//        val workManager = WorkManager.getInstance(this)
+//        workManager.cancelAllWork()
+
+
         // Send "OFF" as JSON object to the topic
         val json = JSONObject()
         json.put("Pump", "OFF")

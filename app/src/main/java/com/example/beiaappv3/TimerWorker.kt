@@ -12,18 +12,24 @@ class TimerWorker(context: Context, workerParams: WorkerParameters) : Worker(con
     private val topic = "meshlium3d4c/Gabi/TC"
 
     override fun doWork(): Result {
-        val durationMillis = inputData.getLong("DURATION_MILLIS", 0L)
+        val remainingMillis = inputData.getLong("REMAINING_MILLIS", 0L)
 
+        if (remainingMillis == 0L) {
+            turnOffPump()
+        }
+        return Result.success()
+
+    }
+
+    private fun turnOffPump() {
         try {
             val mqttClient = MqttClient(brokerUrl, clientId, null)
             mqttClient.connect()
             val json = JSONObject().put("Pump", "OFF")
             mqttClient.publish(topic, json.toString().toByteArray(), 0, false)
             mqttClient.disconnect()
-            return Result.success()
         } catch (e: Exception) {
             e.printStackTrace()
-            return Result.failure()
         }
     }
 }

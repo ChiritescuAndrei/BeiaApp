@@ -94,7 +94,7 @@
         app:layout_constraintVertical_bias="0.681" />
 
     <EditText
-        android:text="test@gmail.com"
+        android:text="andreichiritescu123@gmail.com"
         android:id="@+id/usernameText"
         android:layout_width="250dp"
         android:layout_height="43dp"
@@ -115,7 +115,7 @@
 
     <EditText
         android:id="@+id/password_text"
-        android:text="test123"
+        android:text="parola123!"
         android:layout_width="250dp"
         android:layout_height="46dp"
         android:backgroundTint="@color/beia_orange"
