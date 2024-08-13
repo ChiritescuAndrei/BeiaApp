@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var passwordText: EditText
     private lateinit var loginButton: ImageButton
     private lateinit var registerButton: ImageButton
+    private lateinit var forgotPasswordButton: TextView
     private var isPasswordVisible: Boolean = false
 
     @SuppressLint("ClickableViewAccessibility")
@@ -45,16 +47,21 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-         auth = FirebaseAuth.getInstance()
-         usernameText = findViewById(R.id.usernameText)
-         passwordText = findViewById(R.id.password_text)
-         loginButton = findViewById(R.id.login_btn)
-         registerButton = findViewById(R.id.register_btn)
-
+        auth = FirebaseAuth.getInstance()
+        usernameText = findViewById(R.id.usernameText)
+        passwordText = findViewById(R.id.password_text)
+        loginButton = findViewById(R.id.login_btn)
+        registerButton = findViewById(R.id.register_btn)
+        forgotPasswordButton = findViewById(R.id.forgotPassword)
 
         registerButton.setOnClickListener {
             // Inițiază un intent pentru a deschide activitatea Register
             val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
+        forgotPasswordButton.setOnClickListener {
+            // Inițiază un intent pentru a deschide activitatea ForgotPassword
+            val intent = Intent(this, ForgotPass::class.java)
             startActivity(intent)
         }
 
